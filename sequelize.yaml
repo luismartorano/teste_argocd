@@ -53,3 +53,16 @@ spec:
       port: 80  # Ajuste a porta conforme necessário
       targetPort: 80  # Ajuste a porta do container conforme necessário
   type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-service
+spec:
+  selector:
+    app: mariadb
+  ports:
+    - protocol: TCP
+      port: 3306  # Ajuste a porta conforme necessário
+      targetPort: 3306  # Ajuste a porta do container conforme necessário
+  type: ClusterIP
