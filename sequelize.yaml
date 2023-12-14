@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sequelize-deployment
+spec:
+  replicas: 3  # Ajuste o número de réplicas conforme necessário
+  selector:
+    matchLabels:
+      app: sequelize
+  template:
+    metadata:
+      labels:
+        app: sequelize
+    spec:
+      containers:
+      - name: sequelize-container
+        image: luismartorano/sequelize:v1
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sequelize-service
+spec:
+  selector:
+    app: sequelize
+  ports:
+    - protocol: TCP
+      port: 80  # Ajuste a porta conforme necessário
+      targetPort: 80  # Ajuste a porta do container conforme necessário
+  type: ClusterIP
